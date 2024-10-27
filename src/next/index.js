@@ -1,4 +1,4 @@
-import { prev } from '../../src/members.js';
+import { next } from '../../utils/members.js';
 
 export default function Home() {
     return (<></>)
@@ -7,16 +7,16 @@ export default function Home() {
 export async function getServerSideProps(context) {
     var referrer = context.req.headers.referer;
 
-    if (prev.has(referrer)) {
+    if (next.has(referrer)) {
         return {
             redirect: {
-                destination: prev.get(referrer),
+                destination: next.get(referrer),
                 permanent: false,
             },
         }
     } else {
         console.log(referrer);
-        
+
         return {
             redirect: {
                 destination: '/notmember',
